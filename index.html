@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>登入系統</title>
+</head>
+<body>
+  <h2>請輸入帳號密碼</h2>
+  
+  <form id="loginForm">
+    帳號: <input type="text" id="account" name="account" required><br><br>
+    密碼: <input type="password" id="password" name="password" required><br><br>
+    <button type="submit">登入</button>
+  </form>
+  
+  <h3 id="message" style="color: red;"></h3>
+
+  <script>
+    // 攔截表單的送出動作，改用我們自己寫的 fetch 來傳遞資料
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // 防止網頁預設的重新整理
+      document.getElementById("message").innerText = "連線驗證中，請稍候...";
+
+      var form = document.getElementById("loginForm");
+      var formData = new FormData(form);
+
+      // ★★★ 請把下面這串換成你剛剛在 GAS 複製的「網頁應用程式網址」 ★★★
+      var scriptUrl = "https://script.google.com/macros/s/AKfycbxyxf8Twn0MXZa5uFI_y5MTcG0bQ03hLri-bS07sdSst4OFVVBXqzECjg27vlrd18hY/exec";
+
+      fetch(scriptUrl, {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(text => {
+        if(text === "success") {
+          document.getElementById("message").style.color = "green";
+          document.getElementById("message").innerText = "登入成功！";
+
+          var accountValue = document.getElementById("account").value;
+          sessionStorage.setItem("currentUser", accountValue);
+
+          setTimeout(function() {
+              window.location.href = "story_layout.html"; 
+          }, 1000);
+          // 這裡可以寫 JavaScript 讓網頁跳轉，例如：
+          // window.location.href = "https://你的隱藏內容網頁.com";
+        } else {
+          document.getElementById("message").style.color = "red";
+          document.getElementById("message").innerText = "帳號或密碼錯誤，請重新輸入！";
+        }
+      })
+      .catch(error => {
+        document.getElementById("message").innerText = "系統發生錯誤，請稍後再試。";
+      });
+    });
+  </script>
+</body>
+</html>

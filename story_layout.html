@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專屬故事頁面</title>
+    <style>
+        /* 基本重置與防拷貝設定 */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", "微軟正黑體", sans-serif;
+            background-color: #f7f9fa; 
+            color: #333;
+            line-height: 1.6;
+            padding: 40px 20px;
+            /* 防拷貝：禁止反白選取文字 */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* 容器置中與陰影 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        /* 頁籤導覽列 */
+        .tabs {
+            display: flex;
+            background-color: #f1f3f5;
+            border-bottom: 2px solid #e9ecef;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 16px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #666;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-btn:hover {
+            background-color: #e9ecef;
+            color: #333;
+        }
+        .tab-btn.active {
+            color: #4dabf7; 
+            background-color: #ffffff;
+            border-bottom: 3px solid #4dabf7;
+        }
+
+        /* 內容區域 */
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.4s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 故事背景設定卡片 */
+        .setting-card {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        /* 角色介紹專屬樣式 */
+        .character-card {
+            background-color: #f8f9fa;
+            border-left: 4px solid #4dabf7;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+        }
+        .character-card h3 {
+            margin-bottom: 8px;
+            color: #2b8a3e;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .room-tag {
+            background-color: #e9ecef;
+            color: #495057;
+            font-size: 12px;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+            font-weight: normal;
+        }
+        .character-card p {
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .character-card ul {
+            margin-left: 20px;
+            color: #555;
+        }
+        .friend-group {
+            background-color: #e3f2fd;
+            padding: 10px 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            color: #0d47a1;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* 故事內容樣式 */
+        .story-content {
+            font-size: 16px;
+            text-align: justify;
+            white-space: pre-wrap; 
+        }
+        
+        .story-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px 0; /* 調整連續圖片的間距 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .image-caption {
+            font-size: 14px;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .story-paragraph {
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- 頁籤按鈕區 -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'tab-characters')">角色介紹</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-event1')">事件一</button>
+            <button class="tab-btn" onclick="openTab(event, 'tab-event2')">事件二</button>
+        </div>
+
+        <!-- 頁籤內容區：角色介紹 -->
+        <div id="tab-characters" class="tab-content active">
+            
+            <div class="setting-card">
+                📍 地點：南部某猴子大學<br>
+                ⏱️ 時間：發生在主角一年級的時候
+            </div>
+
+            <div class="character-card">
+                <h3>主角 <span class="room-tag">A 房間</span></h3>
+                <ul>
+                    <li>在事件二中被稱為「明月」或「成功人士」。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>一號 <span class="room-tag">A 房間 (主角同系)</span></h3>
+                <ul>
+                    <li>到現在絕大部分的故事她都不知情。</li>
+                    <li>外號：<strong>蒙古人</strong>。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>二號 <span class="room-tag">B 房間 (主角同系)</span></h3>
+                <ul>
+                    <li>外號:有男友的。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>三號 <span class="room-tag">B 房間 (主角同系)</span></h3>
+                <ul>
+                    <li>曾被網友詐騙 20 萬（其中兩萬是跟阿歡借的）。</li>
+                    <li>外號：<strong>被詐騙的</strong>。</li>
+                    <li>在事件二中被稱為「恨明月」。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>阿歡 <span class="room-tag">B 房間 (中文系)</span></h3>
+                <ul>
+                    <li>和主角關係很好，從沒嫌隙。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>沙沙 <span class="room-tag">B 房間 (中文系)</span></h3>
+                <ul>
+                    <li>和主角關係很好，從沒嫌隙。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>K 小姐 <span class="room-tag">C 房間</span></h3>
+                <ul>
+                    <li>和一號、二號關係很好。</li>
+                    <li>好像挺喜歡主角的，但主角覺得她有點裝 :D</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>L 小姐 <span class="room-tag">D 房間 (主角同系)</span></h3>
+                <ul>
+                    <li>和主角不熟。</li>
+                </ul>
+            </div>
+
+            <div class="character-card">
+                <h3>P 小姐 <span class="room-tag">D 房間 (主角同系)</span></h3>
+                <ul>
+                    <li>和主角不熟。</li>
+                </ul>
+            </div>
+
+            <div class="friend-group">
+                💡 <strong>日常關係備註：</strong>平常主角、一號、二號、三號、阿歡、沙沙都是玩在一起的朋友圈。
+            </div>
+        </div>
+
+        <!-- 頁籤內容區：事件一 -->
+        <div id="tab-event1" class="tab-content">
+            <div class="story-content">
+                <div class="setting-card">
+                    <strong>前情提要：</strong><br>
+                    下學期的某堂課報告需要分組去採訪學校附近的公司，主角、一號、二號、三號、L小姐、P小姐、學姐同一組。<br>
+                    群組狀況：<br>
+                    - 四人群組：主角、一號、二號、三號<br>
+                    - 報告大群組：主角、一號、二號、三號、L小姐、P小姐、學姐
+                </div>
+                
+                <p class="story-paragraph">因為主角有親戚是開公司的(在北部)，所以在決定採訪公司之前有在四人群組問過一號二號三號，要不要去親戚家公司採訪，因為有點規模，所以感覺報告成績也會高一點，一開始1、2、3號都說沒問題。</p>
+                
+                <p class="story-paragraph">所以主角就在報告的大群組詢問其他人，然後主角也把時間、集合地點、注意事項、交通方式等細項一併傳上去，然後說有問題都可以提出討論，結果只有學姐回了OK。主角覺得會不會是因為和L小姐、P小姐不熟，所以他們不敢在大群講話，所以在四人群組和其他三人說大群訊息可以回一下，不然怕其他人社恐不敢回。結果主角在四人群組慘遭已讀，並且二號還傳ig幹片，可見完全沒在鳥主角傳了啥，大群最後也只有學姐回OK。</p>
+
+                <p class="story-paragraph">然後主角過了一天又在大群問了一次「如果OK的話記得回覆一下ㄛ，有問題也都可以提出唷~」 可想而知的又被已讀，所以主角就當他們默認OK，就去和親戚洽談採訪事宜，然後也有談成功。</p>
+
+                <p class="story-paragraph">到了下週一早上的第一節必修課下課時，L小姐突然跑過來找主角說他不行去，但P小姐可以去，所以主角就傳訊息和親戚講調整人數的事。然後第二節必修課下課時，L小姐和P小姐又突然跑來說覺得北部太遠，然後採訪的下週有考試，所以來回很麻煩之類的，二號和三號這時候也跳出來附和說不想去，要改成線上的(但老師當初說要實體，所以那時不確定能不能線上)。但主角已經和採訪公司都約好了，然後他們才在那邊要改，造成相當大的麻煩啊:D，而且當初問一號二號三號要不要去北部採訪也都說可以。</p>
+
+                <p class="story-paragraph">主角當時很不爽啊，所以就直接當面問一號二號三號說「那你們不想去一開始幹嘛答應」，結果二號三號在那邊低頭滑手機當沒聽到，主角也是體驗一波現實版已讀不回了，所以主角更不爽了，直接對二號說「就那個二號最一開始說可以，然後現在又在那邊搞」，結果一號就跟主角道歉，啊二號三號依舊滑手機。</p>
+
+                <p class="story-paragraph">後來寫信去問老師能不能改成線上採訪的也是主角，幸好老師有同意啊，然後最後這組的報告也是系上第一名啊可喜可賀(雖然報告裡有大概50%都是主角做的)。後面一陣子和二號三號相處起來都有種詭異的氣氛(尤其是三號)，不過主角平常和一號一起住，所以主角其實覺得沒差:D</p>
+
+                <p class="story-paragraph">跟二號三號發生(單方面)爭執的隔天晚上，主角想和阿歡、沙沙講這件事，又剛好學校外某間冰淇淋店那天出的口味是主角和阿歡都喜歡的，所以他們三個一起去學校外吃晚餐，然後回來之後二號和三號就看起來很不爽阿歡和沙沙，一股要冷戰的味道(主角非常疑惑啊有事不直接講的人到底想怎樣)。</p>
+
+                <p class="story-paragraph">又過了幾小時，二號在限時動態PO了個微積分題目說不會寫，主角想說來舉個和平的小手問一下對方需不需要教學(因為二號、三號是數學白癡)，結果主角依舊被塑膠。</p>
+
+                <p class="story-paragraph">此時阿歡傳訊息和主角說，三號好像不會寫題目，想問主角數學題，但是二號阻止他叫他不要去問主角，主角覺得問號這是什麼小學生行為，給了台階還不下的嗎好神奇。</p>
+
+                <p class="story-paragraph">然後阿歡覺得很奇怪啊，為什麼三號在阿歡和主角吃完飯後，就一直不理阿歡，所以阿歡傳了一篇文給三號(但主角覺得依舊詭異啊他們明明住同一間房為啥要用傳的)。阿歡傳給三號的文內容→「感覺你回到宿舍後都不太開心，我不確定我做了什麼讓你不開心的事，如果有的話可以跟我說一下嗎，我之後會改進，如果是覺得我太煩也可以跟我講，要是回這則訊息讓你有壓力的話也可以不用回沒關係，有心事的話都可以跟我說哦~ 你要是看到的話可以傳個貼圖給我嗎?」，結果三號還真只傳了個貼圖。</p>
+
+                <p class="story-paragraph">之後幾天維持著主角、阿歡、沙沙很好，然後二號三號不鳥主角那群的情況。主角覺得這種情況太智障了，決定去把問題講開，阿歡和沙沙也覺得有道理，所以趁二號去上課的時候，阿歡和沙沙在B房外面跟主角討論要怎麼和三號溝通，並解決問題，討論好後就進去B房間。</p>
+
+                <p class="story-paragraph">主角進去之後說「欸出來聊一下天啊，你都不說話是要怎麼解決問題」，然後三號一直躲在桌簾後面不說話，然後主角又問他「你哪裡不爽你要講啊，不然問題就一直在那，報告的事情你哪裡不爽你就直接說」，然後三號說他沒有不爽報告的事(反正主角不信)，然後主角又說「那你沒不爽幹嘛不回我訊息」，三號說「我等一下回不行喔」(後來主角懷疑是因為他快哭了所以才一直躲在桌簾後面)。</p>
+
+                <p class="story-paragraph">然後阿歡問他「我哪裡做不好，為什麼不理我」，結果三號說「因為你跟主角自己去吃冰」</p>
+
+                <p class="story-paragraph">主角:?<br>阿歡:?<br>沙沙:?</p>
+
+                <p class="story-paragraph">就是沒揪三號所以他不爽的意思，但主角覺得原因不只這樣啊。後來主角覺得實在是太莫名其妙了所以覺得整件事很好笑。</p>
+                
+                <p class="story-paragraph">總而言之三號就因為一些很莫名其妙的原因在那邊不爽主角(或許事件二可以知道原因)。之後和二號也恢復平常相處的模式了，但一直到學期結束和三號的關係都很僵。</p>
+            </div>
+        </div>
+
+        <!-- 頁籤內容區：事件二 -->
+        <div id="tab-event2" class="tab-content">
+            <div class="story-content">
+                <div class="setting-card">
+                    <strong>前情提要：</strong><br>
+                    ◆ 在剛升上大一的時候，大約九月份多，主角有和三號說過自己要考轉學考。<br>
+                    ◆ 事件一是在隔年四月左右發生。<br>
+                    ◆ 主角在六月底成功轉走。
+                </div>
+
+                <p class="story-paragraph">在主角轉走之後的某年，阿歡突然在主角、阿歡、沙沙三人的群組，問了一個問題</p>
+
+                <div style="text-align: center;">
+                    <img src="2511.jpg" alt="群組截圖 1" class="story-image">
+                    <img src="2512.jpg" alt="群組截圖 2" class="story-image">
+                    <img src="2513.jpg" alt="群組截圖 3" class="story-image">
+                    <img src="2514.jpg" alt="群組截圖 4" class="story-image">
+                    <img src="2515.jpg" alt="群組截圖 5" class="story-image">
+                    <img src="2516.jpg" alt="群組截圖 6" class="story-image">
+                    <img src="2517.jpg" alt="群組截圖 7" class="story-image">
+                    <img src="2518.jpg" alt="群組截圖 8" class="story-image">
+                    <img src="2519.jpg" alt="群組截圖 9" class="story-image">
+                    <img src="25110.jpg" alt="群組截圖 10" class="story-image">
+                </div>
+
+                <p class="story-paragraph">為此，沙沙和阿歡做了一個ppt解釋當天情況</p>
+
+                <div style="text-align: center;">
+                    <img src="0801.PNG" alt="PPT 截圖 1" class="story-image">
+                    <img src="0802.PNG" alt="PPT 截圖 2" class="story-image">
+                    <img src="0803.PNG" alt="PPT 截圖 3" class="story-image">
+                    <img src="0804.PNG" alt="PPT 截圖 4" class="story-image">
+                    <img src="0805.PNG" alt="PPT 截圖 5" class="story-image">
+                    <img src="0806.PNG" alt="PPT 截圖 6" class="story-image">
+                </div>
+
+                <p class="story-paragraph">好神奇的故事。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 頁籤切換邏輯
+        function openTab(evt, tabId) {
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            var tabBtns = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tabBtns.length; i++) {
+                tabBtns[i].classList.remove("active");
+            }
+            document.getElementById(tabId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // 防護鎖 1：鎖住滑鼠右鍵
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 防護鎖 2：鎖住特定鍵盤按鍵
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12') e.preventDefault();
+            
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+            }
+
+            if (e.shiftKey && e.metaKey && (e.key === 's' || e.key === 'S')) {
+                e.preventDefault();
+            }
+
+            const blockedKeys = ['Shift', 'Meta', 'PrintScreen', 's', 'S', 'Control', 'Alt'];
+            if (blockedKeys.includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+
+        // 防護鎖 3：防截圖！失去焦點時隱藏內容
+        window.addEventListener('blur', function() {
+            document.body.style.opacity = '0'; 
+        });
+        window.addEventListener('focus', function() {
+            document.body.style.opacity = '1'; 
+        });
+
+        // 防護鎖 4：動態滿版浮水印
+        var userName = sessionStorage.getItem("currentUser") || "訪客";
+        var watermarkText = "歡迎"+ userName + "禁止截圖唷>_0"; 
+
+        var canvas = document.createElement('canvas');
+        canvas.width = 300;  
+        canvas.height = 200; 
+        var ctx = canvas.getContext('2d');
+        
+        ctx.font = '22px "微軟正黑體", sans-serif'; 
+        ctx.fillStyle = 'rgba(150, 150, 150, 0.15)'; 
+        
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(-30 * Math.PI / 180);
+        ctx.fillText(watermarkText, -80, 0); 
+
+        var watermarkDiv = document.createElement('div');
+        watermarkDiv.style.position = 'fixed';
+        watermarkDiv.style.top = '0';
+        watermarkDiv.style.left = '0';
+        watermarkDiv.style.width = '100vw';
+        watermarkDiv.style.height = '100vh';
+        watermarkDiv.style.pointerEvents = 'none'; 
+        watermarkDiv.style.zIndex = '9999'; 
+        watermarkDiv.style.backgroundImage = 'url(' + canvas.toDataURL('image/png') + ')';
+        
+        document.body.appendChild(watermarkDiv);
+    </script>
+</body>
+</html>
