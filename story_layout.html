@@ -382,20 +382,26 @@
         });
 
         // 防護鎖 4：動態滿版浮水印
-        var userName = sessionStorage.getItem("currentUser") || "訪客";
-        var watermarkText = "歡迎"+ userName + "，" + "禁止截圖唷>_0"; 
+       // 1. 把文字拆成上下兩行
+var userName = sessionStorage.getItem("currentUser") || "訪客";
+var line1 = "歡迎 " + userName;
+var line2 = "禁止截圖唷>_0";
 
-        var canvas = document.createElement('canvas');
-        canvas.width = 220;  
-        canvas.height = 130; 
-        var ctx = canvas.getContext('2d');
-        
-        ctx.font = '22px "微軟正黑體", sans-serif'; 
-        ctx.fillStyle = 'rgba(150, 150, 150, 0.15)'; 
-        
-        ctx.translate(canvas.width / 2, canvas.height / 2);
-        ctx.rotate(-30 * Math.PI / 180);
-        ctx.fillText(watermarkText, -80, 0); 
+var canvas = document.createElement('canvas');
+canvas.width = 220;  
+canvas.height = 130; 
+var ctx = canvas.getContext('2d');
+
+ctx.font = '18px "微軟正黑體", sans-serif'; 
+ctx.fillStyle = 'rgba(150, 150, 150, 0.15)'; 
+ctx.textAlign = 'center'; 
+
+ctx.translate(canvas.width / 2, canvas.height / 2);
+ctx.rotate(-30 * Math.PI / 180);
+
+// 2. 分兩次畫文字，透過修改後面的 Y 座標來調整行距
+ctx.fillText(line1, 0, -12); // 第一行：稍微往上移 12px
+ctx.fillText(line2, 0, 12);  // 第二行：稍微往下移 12px
 
         var watermarkDiv = document.createElement('div');
         watermarkDiv.style.position = 'fixed';
